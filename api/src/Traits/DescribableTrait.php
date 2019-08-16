@@ -1,11 +1,13 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Traits;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
+/**
+ * Trait DescribableTrait
+ * @package App\Traits
+ */
 trait DescribableTrait
 {
     /**
