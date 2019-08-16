@@ -30,5 +30,3 @@ services:
     volumes:
       - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./api/public:/usr/src/app
-
-
