@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3.8-fpm
 
 RUN PATH=$PATH:/usr/src/app/vendor/bin:bin
 
