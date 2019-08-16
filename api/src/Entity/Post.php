@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Traits\CategorizableTrait;
 use App\Traits\CommentableTrait;
 use App\Traits\DescribableTrait;
 use App\Traits\EntityTrait;
@@ -19,6 +20,7 @@ class Post
     use EntityTrait;
     use DescribableTrait;
     use CommentableTrait;
+    use CategorizableTrait;
 
     /**
      * @var User $author
