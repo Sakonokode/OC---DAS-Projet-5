@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Traits\EntityTrait;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Class User
@@ -16,6 +17,7 @@ use App\Traits\EntityTrait;
  * @ORM\HasLifecycleCallbacks()
  *
  * @package Blog\Entity
+ * @ApiResource
  */
 class User implements UserInterface
 {
