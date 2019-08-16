@@ -16,6 +16,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class UserFixtures extends Fixture
 {
+    public const ADMIN_USER_REFERENCE = 'admin@gmail.com';
+
     /** @var UserPasswordEncoderInterface $passEncoder */
     private $passEncoder;
 
@@ -32,6 +34,11 @@ final class UserFixtures extends Fixture
         $users = Yaml::parseFile(__DIR__ . '/fixtures/users.yaml');
 
         foreach ($users['users'] as $nickName => $user) {
+
+            if ($nickName = 'admin') {
+                dump('success');
+                $this->addReference(self::ADMIN_USER_REFERENCE, $user);
+            }
 
             $user = $this->instantiate(
                 $user['email'],
