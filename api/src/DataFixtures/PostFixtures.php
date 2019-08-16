@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -32,6 +33,10 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post->setTitle($currentPost['title']);
             $post->setContent($currentPost['content']);
 
+            /** @var Category $category */
+            $category = $this->getReference($currentPost['category']);
+            $post->addCategory($category);
+
             $manager->persist($post);
         }
 
@@ -45,6 +50,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
     {
         return array(
             UserFixtures::class,
+            CategoryFixtures::class,
         );
     }
 }
