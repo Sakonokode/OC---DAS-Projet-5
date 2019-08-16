@@ -13,7 +13,6 @@ use App\Traits\EntityTrait;
  * Class User
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(name="blog_user")
  * @ORM\HasLifecycleCallbacks()
  *
  * @package Blog\Entity
@@ -21,25 +20,26 @@ use App\Traits\EntityTrait;
 class User implements UserInterface
 {
     use EntityTrait;
+
     /**
      * @var null|string $email
-     *
      * @ORM\Column(type="string", unique=true)
      * @Assert\Email()
      */
     private $email;
+
     /**
      * @var string $password
-     *
      * @ORM\Column(type="string")
      */
     private $password;
+
     /**
      * @var array $roles
-     *
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
     /**
      * @return null|string
      */
@@ -47,6 +47,7 @@ class User implements UserInterface
     {
         return $this->email;
     }
+
     /**
      * @param string $email
      */
@@ -54,6 +55,7 @@ class User implements UserInterface
     {
         $this->email = $email;
     }
+
     /**
      * @return null|string
      */
@@ -61,6 +63,7 @@ class User implements UserInterface
     {
         return $this->password;
     }
+
     /**
      * @param string $password
      */
@@ -68,6 +71,7 @@ class User implements UserInterface
     {
         $this->password = $password;
     }
+
     /**
      * Returns the roles or permissions granted to the user for security.
      */
@@ -80,13 +84,17 @@ class User implements UserInterface
         }
         return array_unique($roles);
     }
+
+    /**
+     * @param array $roles
+     */
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
     }
+
     /**
      * Returns the salt that was originally used to encode the password.
-     *
      * {@inheritdoc}
      */
     public function getSalt(): ?string
@@ -96,9 +104,9 @@ class User implements UserInterface
         // the salt value is built-in and you don't have to generate one
         return null;
     }
+
     /**
      * Removes sensitive data from the user.
-     *
      * {@inheritdoc}
      */
     public function eraseCredentials(): void
@@ -106,15 +114,16 @@ class User implements UserInterface
         // if you had a plainPassword property, you'd nullify it here
         // $this->plainPassword = null;
     }
+
     /**
      * Returns the username used to authenticate the user.
-     *
      * @return string The username
      */
     public function getUsername(): string
     {
         return $this->email;
     }
+
     /**
      * String representation of object
      * @link https://php.net/manual/en/serializable.serialize.php
@@ -130,6 +139,7 @@ class User implements UserInterface
             // $this->salt,
         ]);
     }
+
     /**
      * Constructs the object
      * @link https://php.net/manual/en/serializable.unserialize.php
