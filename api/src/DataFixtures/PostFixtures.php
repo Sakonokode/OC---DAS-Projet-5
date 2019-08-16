@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -28,10 +29,12 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         $posts = Yaml::parseFile(__DIR__ . '/fixtures/posts.yaml');
 
         foreach ($posts['posts'] as $item => $currentPost) {
+            $comments = $manager->getRepository(Comment::class)->findAll();
             $post = new Post();
             $post->setAuthor($author);
             $post->setTitle($currentPost['title']);
             $post->setContent($currentPost['content']);
+            $post->setComments($comments);
 
             /** @var Category $category */
             $category = $this->getReference($currentPost['category']);
@@ -51,6 +54,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         return array(
             UserFixtures::class,
             CategoryFixtures::class,
+            CommentFixtures::class,
         );
     }
 }

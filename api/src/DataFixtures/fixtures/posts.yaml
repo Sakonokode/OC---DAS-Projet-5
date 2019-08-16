@@ -8,6 +8,8 @@ posts:
     metus eu lectus. Nam eleifend nisl vel urna vehicula, mollis aliquet lectus facilisis. Vivamus gravida fermentum
     dictum. Nulla a consequat dui, id dignissim tellus."
     category: "News"
+    comments:
+      - 1
 
   Lorem_Ipsum_Dolor_Sit_Amet_Consectetur_Adipiscing_Elit_Sed_Placerat:
     title: "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Sed Placerat ?"
@@ -22,3 +24,5 @@ posts:
     ullamcorper, lectus velit tristique sapien, eu interdum sapien diam sed massa. Pellentesque ultricies odio at
     enim pulvinar ornare."
     category: "Others"
+    comments:
+      - 1
