@@ -8,6 +8,7 @@ use App\Traits\CategorizableTrait;
 use App\Traits\CommentableTrait;
 use App\Traits\DescribableTrait;
 use App\Traits\EntityTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Post

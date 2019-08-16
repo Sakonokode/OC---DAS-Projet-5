@@ -6,6 +6,8 @@ namespace App\Entity;
 
 use App\Traits\EntityTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Comment
