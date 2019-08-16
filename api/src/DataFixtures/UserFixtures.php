@@ -35,16 +35,15 @@ final class UserFixtures extends Fixture
 
         foreach ($users['users'] as $nickName => $user) {
 
-            if ($nickName = 'admin') {
-                dump('success');
-                $this->addReference(self::ADMIN_USER_REFERENCE, $user);
-            }
-
             $user = $this->instantiate(
                 $user['email'],
                 $user['password'],
                 $user['roles']
             );
+
+            if ($nickName = 'admin') {
+                $this->setReference(self::ADMIN_USER_REFERENCE, $user);
+            }
 
             $manager->persist($user);
         }
