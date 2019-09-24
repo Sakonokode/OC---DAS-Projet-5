@@ -16,7 +16,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  *
- * @package Blog\Entity
+ * @package App\Entity
  * @ApiResource
  */
 class User implements UserInterface
@@ -24,15 +24,30 @@ class User implements UserInterface
     use EntityTrait;
 
     /**
+     * @var string
+     *
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    protected $username;
+
+    /**
      * @var null|string $email
-     * @ORM\Column(type="string", unique=true)
-     * @Assert\Email()
+     *
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 
     /**
      * @var string $password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
@@ -42,41 +57,33 @@ class User implements UserInterface
      */
     private $roles = [];
 
-    /**
-     * @return null|string
-     */
+    public function __construct(string $username)
+    {
+        $this->username = $username;
+        $this->email = $username;
+        $this->roles = ['ROLE_USER'];
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * @return null|string
-     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $password
-     */
     public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
-    /**
-     * Returns the roles or permissions granted to the user for security.
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -87,9 +94,6 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    /**
-     * @param array $roles
-     */
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
@@ -123,7 +127,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return $this->email;
+        return $this->username;
     }
 
     /**
