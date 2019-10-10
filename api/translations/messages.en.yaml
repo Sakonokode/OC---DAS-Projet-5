@@ -1,0 +1,15 @@
+blog:
+  forms:
+    register:
+      username: 'Login'
+      password: 'Password'
+      repeat_password: 'Confirm your password'
+    buttons:
+      register: 'Register'
+    error:
+      password_and_confirm_password_does_not_match: 'Password and confirm does not match'
+    login:
+      username: 'Login'
+      password: 'Password'
+      buttons:
+        register: 'Login'

@@ -38,7 +38,8 @@ final class UserFixtures extends Fixture
             $user = $this->instantiate(
                 $user['email'],
                 $user['password'],
-                $user['roles']
+                $user['roles'],
+                $user['username']
             );
 
             if ($nickName = 'admin') {
@@ -60,10 +61,11 @@ final class UserFixtures extends Fixture
     public function instantiate(
         string $email = null,
         string $password = null,
-        array $roles = null
+        array $roles = null,
+        string $username
     ): User
     {
-        $user = new User();
+        $user = new User($username);
         $user->setEmail($email);
         $user->setPassword($this->passEncoder->encodePassword($user, $password));
         $user->setRoles($roles);

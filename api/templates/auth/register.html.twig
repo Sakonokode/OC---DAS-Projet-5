@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {'action': path('register'), 'attr': {'class': 'ui form'} }) }}
+    {{ form_errors(form.username) }}
+    <div>
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username) }}
+    </div>
+    {{ form_errors(form.password) }}
+    <div>
+        {{ form_widget(form.password) }}
+    </div>
+    <button class="ui button">{{ 'blog.forms.buttons.register' | trans }}</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
