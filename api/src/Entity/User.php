@@ -27,8 +27,7 @@ class User implements UserInterface
      * @var string
      *
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
+     *     message = "The email '{{ value }}' is not a valid email."
      * )
      * @ORM\Column(type="string", length=255, unique=true)
      */
@@ -38,8 +37,7 @@ class User implements UserInterface
      * @var null|string $email
      *
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
+     *     message = "The email '{{ value }}' is not a valid email."
      * )
      * @ORM\Column(type="string", length=255, unique=true)
      */
@@ -55,7 +53,7 @@ class User implements UserInterface
      * @var array $roles
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles;
 
     public function __construct(string $username)
     {

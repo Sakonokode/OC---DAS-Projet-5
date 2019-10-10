@@ -1,16 +1,19 @@
 users:
   user-1:
+    username: "user1"
     email: "user-1@gmail.com"
     password: m3p
     roles:
       - "ROLE_USER"
   user-2:
+    username: "user2"
     email: "user-2@gmail.com"
     password: m3p
     roles:
       - "ROLE_USER"
   admin:
+    username: "admin"
     email: "admin@gmail.com"
     password: m3p
     roles:
-      - "ROLE_ADMIN"
+      - "ROLE_SUPER_ADMIN"
