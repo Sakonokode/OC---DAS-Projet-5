@@ -11,12 +11,8 @@ use App\Traits\EntityTrait;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * Class User
- *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
- *
- * @package App\Entity
  * @ApiResource
  */
 class User implements UserInterface
