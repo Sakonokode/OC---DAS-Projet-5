@@ -16,6 +16,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AuthController extends AbstractController
 {
+    /**
+     * @return Response
+     */
     public function login(): Response
     {
         $form = $this->createForm(LoginType::class);

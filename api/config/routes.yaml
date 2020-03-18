@@ -11,10 +11,15 @@ register:
   controller: App\Controller\AuthController::register
   methods: [GET|POST]
 
-login:
-  path: /login
-  controller: App\Controller\AuthController::login
-  methods:  [GET|POST]
+admin_login:
+  path: /admin/login
+  controller: App\Controller\SecurityController::login
+  methods: [GET|POST]
+
+admin_logout:
+  path: /admin/logout
+  controller: App\Controller\SecurityController:logout
+  methods: [GET]
 
 api:
   path: /api/v1
@@ -23,8 +28,12 @@ api:
 api_login:
   path: /api/login
   controller: App\Controller\AuthController::login
-  methods:  [POST]
+  methods: [GET]
 
 api_login_check:
   path: /api/login_check
   methods: [POST]
+
+admin:
+  path: /admin
+  methods: [GET]

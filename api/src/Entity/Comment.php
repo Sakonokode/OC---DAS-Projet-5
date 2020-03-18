@@ -11,8 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * Class Comment
- * @package App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ApiResource
@@ -36,20 +34,20 @@ class Comment
     /**
      * @var User $author
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
      * One Comment has Many Comments/Answers.
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent")
      */
     private $children;
 
     /**
      * Many Answers/Comments have One Parent.
-     * @ORM\ManyToOne(targetEntity="App\Entity\Comment", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="children")
      */
     private $parent;
 
