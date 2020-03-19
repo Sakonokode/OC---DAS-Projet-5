@@ -9,7 +9,7 @@ stop: ##@docker Stop docker's containers
 start: ##@docker Start docker's containers
 	@echo "$'\e[0;34m Starting docker's containers... $'\e[0m"
 	@$(call run-docker-compose, up -d --build --remove-orphans || true)
-	@echo "$'\e[32m Application should be up and running on $'\e[1;34m https://localhost:8080/ $'\e[0m"
+	@echo "$'\e[32m Application should be up and running on $'\e[1;34m http://localhost:8080/ $'\e[0m"
 
 down: stop ##@docker Down docker's containers
 	@echo "$'\e[0;34m Down containers... $'\e[0m"
