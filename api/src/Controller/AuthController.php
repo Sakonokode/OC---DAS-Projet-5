@@ -13,17 +13,28 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class AuthController extends AbstractController
 {
-    /**
-     * @return Response
-     */
+    /** @var SerializerInterface */
+    private $serializer;
+
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
     public function login(): Response
     {
-        $form = $this->createForm(LoginType::class);
+        /** @var User $user */
+        $user = $this->getUser();
+        $userClone = clone $user;
+        $userClone->setPassword('');
+        $data = $this->serializer->serialize($userClone, JsonEncoder::FORMAT);
 
-        return new Response($this->renderView('auth/login.html.twig', ['form' => $form->createView()]), Response::HTTP_OK);
+        return new JsonResponse($data, Response::HTTP_OK, [], true);
     }
 
     public function register(

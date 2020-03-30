@@ -33,18 +33,18 @@
                 url: url,
                 type: "GET",
                 beforeSend: function (xhr) {
-                    $('#body').html(loader);
+                    $('#app').html(loader);
                     xhr.setRequestHeader('Authorization', token);
                     console.log('Loading', url);
                 },
                 error: function (response) {
                     console.error('Failed to get /');
                     console.log('Error', response);
-                    $('#body').html(fail);
+                    $('#app').html(fail);
                 },
                 success: function (response) {
                     // window.location.hash = '#' + url;
-                    $('#body').html(token);
+                    $('#app').html(token);
                 }
             });
         };
@@ -54,7 +54,7 @@
                 'password': password
             };
             console.log(auth);
-            $('#body').html(loader);
+            $('#app').html(loader);
             console.log('Try to login...');
             $.ajax({
                 method: 'POST',
@@ -69,12 +69,12 @@
                     localStorage.setItem('token', response.token);
                     Cookies.remove('token');
                     Cookies.set('token', 'Bearer ' + response.token, {expires: 7, path: '/'});
-                    $('#body').html(token);
+                    $('#app').html(token);
                 },
                 error: function (response) {
                     console.error('Failed to login');
                     console.log('Error', response);
-                    $('#body').html(response.statusText);
+                    $('#app').html(response.statusText);
                 },
             });
         };
@@ -85,7 +85,7 @@
             login(username, password);
         });
         if (token !== null) {
-            $('#body').html(token);
+            $('#app').html(token);
         }
     </script>
 {% endblock %}

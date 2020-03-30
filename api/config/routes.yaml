@@ -3,8 +3,10 @@ swagger_ui:
   controller: api_platform.swagger.action.ui
 
 index:
-  path: /
+  path: /{vueRouting}
   controller: App\Controller\HomeController::index
+  requirements:
+    vueRouting: '^(?!api|_(profiler|wdt)).*'
 
 register:
   path: /register
@@ -26,12 +28,12 @@ api:
   controller: App\Controller\AuthController::api
 
 api_login:
-  path: /api/login
+  path: /api/security/login
   controller: App\Controller\AuthController::login
   methods: [GET]
 
 api_login_check:
-  path: /api/login_check
+  path: /api/security/login_check
   methods: [POST]
 
 admin:
