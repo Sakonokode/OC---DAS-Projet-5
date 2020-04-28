@@ -50,7 +50,7 @@ security:
             pattern: ^/*$
             logout: true
             stateless: true
-            anonymous: false
+            anonymous: true
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator

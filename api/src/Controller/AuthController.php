@@ -13,13 +13,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
+// API auth
 class AuthController extends AbstractController
 {
-    /**
-     * @return Response
-     */
-    public function login(): Response
+    /** @var SerializerInterface */
+    private $serializer;
+
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
+    public function login(Request $request): Response
     {
         $form = $this->createForm(LoginType::class);
 
@@ -60,9 +67,6 @@ class AuthController extends AbstractController
         return new Response($this->renderView('auth/register.html.twig', ['form' => $form->createView()]), Response::HTTP_OK);
     }
 
-    /**
-     * @return Response
-     */
     public function api(): Response
     {
         return new Response(sprintf('Logged in as %s', $this->getUser()->getUsername()));

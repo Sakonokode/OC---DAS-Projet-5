@@ -24,3 +24,7 @@ define run-docker
 	docker $(1)
 endef
 
+define run-php
+	sudo docker exec -ti ocdasprojet5_php_1 $(1)
+endef
+

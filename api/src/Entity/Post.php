@@ -28,21 +28,32 @@ class Post
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $author;
+    private $author;
 
     /**
-     * @return User
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
      */
+    private $image;
+
     public function getAuthor(): User
     {
         return $this->author;
     }
 
-    /**
-     * @param User $author
-     */
     public function setAuthor(User $author): void
     {
         $this->author = $author;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): void
+    {
+        $this->image = $image;
     }
 }

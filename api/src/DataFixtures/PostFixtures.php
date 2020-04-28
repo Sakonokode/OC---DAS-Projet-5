@@ -10,7 +10,7 @@ use App\Entity\Post;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -29,12 +29,11 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         $posts = Yaml::parseFile(__DIR__ . '/fixtures/posts.yaml');
 
         foreach ($posts['posts'] as $item => $currentPost) {
-            $comments = $manager->getRepository(Comment::class)->findAll();
             $post = new Post();
             $post->setAuthor($author);
             $post->setTitle($currentPost['title']);
             $post->setContent($currentPost['content']);
-            $post->setComments($comments);
+            $post->setDescription($currentPost['description']);
 
             /** @var Category $category */
             $category = $this->getReference($currentPost['category']);

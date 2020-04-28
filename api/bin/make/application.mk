@@ -18,3 +18,10 @@ dc: ##@app Clean doctrine cache, and validate schema
 	-$(call run-php, bin/console doctrine:cache:clear-result --env=dev)
 	-$(call run-php, bin/console doctrine:schema:validate --env=dev)
 	@echo "$'\e[32m Doctrine cache cleared $'\e[0m"
+
+lf: ##@app Delete database if exists, create new one and load fixtures
+	-$(call run-php, bin/console d:d:d --force --if-exists)
+	-$(call run-php, bin/console d:d:c --if-not-exists)
+	-$(call run-php, bin/console d:s:u --force)
+	-$(call run-php, bin/console d:f:l --no-interaction)
+	@echo "$'\e[32m Fixtures loaded $'\e[0m"

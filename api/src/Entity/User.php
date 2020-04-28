@@ -51,6 +51,13 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $avatar;
+
     public function __construct(string $username)
     {
         $this->username = $username;
@@ -91,6 +98,16 @@ class User implements UserInterface
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): void
+    {
+        $this->avatar = $avatar;
     }
 
     /**
