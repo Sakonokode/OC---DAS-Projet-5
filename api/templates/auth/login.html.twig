@@ -29,12 +29,13 @@
             if (token === null) {
                 console.error('Authentication needed ! Please login')
             }
+
             $.ajax({
                 url: url,
                 type: "GET",
                 beforeSend: function (xhr) {
                     $('#body').html(loader);
-                    xhr.setRequestHeader('Authorization', token);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                     console.log('Loading', url);
                 },
                 error: function (response) {
@@ -70,6 +71,7 @@
                     Cookies.remove('token');
                     Cookies.set('token', 'Bearer ' + response.token, {expires: 7, path: '/'});
                     $('#body').html(token);
+                    get('https://projet5.sakonokode.dev/');
                 },
                 error: function (response) {
                     console.error('Failed to login');
