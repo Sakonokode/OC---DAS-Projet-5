@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
+import Documentation from './views/Documentation.vue';
 
 Vue.use(Router);
 
@@ -27,8 +28,12 @@ export const router = new Router({
       component: Login
     },
     {
-      path: '/register',
+      path: '/api/register',
       component: Register
+    },
+    {
+      path: '/api/v1',
+      component: Documentation
     },
   ]
 });

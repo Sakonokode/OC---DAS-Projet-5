@@ -1,29 +1,26 @@
 <template>
   <div class="container">
-    <header class="jumbotron">
-      <h3>{{content}}</h3>
-    </header>
+      {{content}}
   </div>
 </template>
-
 <script>
 import UserService from '../services/user.service';
 
 export default {
-  name: 'Home',
+  name: 'Documentation',
   data() {
     return {
       content: ''
     };
   },
   mounted() {
-    UserService.findAllPosts().then(
+    UserService.getDocumentation().then(
       response => {
         this.content = response.data;
       },
       error => {
         this.content =
-          (error.response && error.response.data) ||
+          (error.response && error.response.data && error.response.data.message) ||
           error.message ||
           error.toString();
       }

@@ -53,6 +53,7 @@
 
 <script>
 import User from '../models/user';
+import UserService from '../services/user.service';
 
 export default {
   name: 'Login',
@@ -70,7 +71,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push('/posts');
+      this.$router.push('/api/v1');
     }
   },
   methods: {
@@ -85,7 +86,7 @@ export default {
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
-              this.$router.push('/profile');
+              this.$router.push('/api/v1');
             },
             error => {
               this.loading = false;

@@ -1,15 +1,15 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'https://projet5.sakonokode.dev/api';
 
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + 'all');
+  findAllPosts() {
+    return axios.get(API_URL, + '/posts', { headers: authHeader() });
   }
 
-  getUserBoard() {
-    return axios.get(API_URL + 'user', { headers: authHeader() });
+  getDocumentation() {
+    return axios.get(API_URL + '/v1', { headers: authHeader() });
   }
 
   getModeratorBoard() {

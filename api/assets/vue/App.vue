@@ -9,6 +9,11 @@
           </router-link>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href @click.prevent="documentation">
+            <font-awesome-icon icon="book" />Documentation
+          </a>
+        </li>
+        <li class="nav-item">
           <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
         </li>
       </div>
@@ -28,9 +33,8 @@
 
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/profile" class="nav-link">
-            <font-awesome-icon icon="user" />
-            {{ currentUser.username }}
+          <router-link to="/api/posts" class="nav-link">
+            <font-awesome-icon icon="newspaper" />Posts
           </router-link>
         </li>
         <li class="nav-item">
@@ -48,6 +52,8 @@
 </template>
 
 <script>
+import UserService from './services/user.service';
+
 export default {
   computed: {
     currentUser() {
@@ -58,6 +64,9 @@ export default {
     logOut() {
       this.$store.dispatch('auth/logout');
       this.$router.push('api/login');
+    },
+    documentation() {
+      this.$router.push('api/v1');
     }
   }
 };
