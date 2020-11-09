@@ -4,10 +4,10 @@ swagger_ui:
 
 index:
   path: /
-  controller: App\Controller\HomeController::index
+  controller: App\Controller\HomeController
 
 register:
-  path: /register
+  path: /api/register
   controller: App\Controller\AuthController::register
   methods: [GET|POST]
 
