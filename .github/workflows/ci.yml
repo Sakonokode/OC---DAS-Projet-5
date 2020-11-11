@@ -13,13 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - uses: php-actions/composer@v2
-
-      # Runs a set of commands using the runners shell
+      - uses: php-actions/composer@v1
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v9
         with:
