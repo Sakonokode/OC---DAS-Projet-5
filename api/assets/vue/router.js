@@ -32,7 +32,7 @@ export const router = new Router({
       component: Register
     },
     {
-      path: '/api/v1',
+      path: '/api/docs',
       component: Documentation
     },
   ]

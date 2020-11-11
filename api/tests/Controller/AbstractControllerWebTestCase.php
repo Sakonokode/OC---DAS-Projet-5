@@ -4,36 +4,56 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
-use Safe\Exceptions\JsonException;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Client;
 use function \json_decode;
 use function \json_encode;
+use Symfony\Contracts\HttpClient\ResponseInterface;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 abstract class AbstractControllerWebTestCase extends WebTestCase
 {
-    protected const URL = 'https://projet5.sakonokode.dev/api/login_check';
+    protected const BASE_URI = 'https://projet5.sakonokode.dev';
+    protected const BASE_LOCALHOST_URI = 'https://localhost';
 
-    protected function createAuthenticatedClient(string $username = 'admin', string $password = 'm3p'): Client
+    protected UrlGeneratorInterface $urlGenerator;
+    protected HttpClientInterface $client;
+
+    protected function setUp(): void
     {
-        $client = static::createClient();
-        $client->request(
-        'POST',
-        self::URL,
-        [
-            '_username' => $username,
-            '_password' => $password,
-        ]
-        );
+        self::bootKernel();
+        $this->client = self::$container->get(HttpClientInterface::class);
+        $this->urlGenerator = self::$container->get(UrlGeneratorInterface::class);
+    }
 
-        $data = json_decode($client->getResponse()->getContent(), true);
-dd($client->getRequest(), $client->getResponse()->getStatusCode(), $data);
+    protected function getToken(string $username = 'admin', string $password = 'm3p'): ?string
+    {
+        $url = $this->urlGenerator->generate('api_login_check');
+        
+        $response = $this->request('POST', $url, [
+            'username' => $username,
+            'password' => $password,
+        ]);
 
-        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
-        $client->setServerParameter('CONTENT_TYPE', 'application/json');
+        $token = json_decode($response->getContent(), true)['token'] ?? null;
 
-        return $client;
+        if ($token === null) {
+            return null;
+        }
+
+        return $token;
+    }
+
+    protected function request(string $method, string $url, ?array $data = [], array $headers = []): ResponseInterface
+    {
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ] + $headers,
+            'base_uri' => self::BASE_URI,
+            'body' => json_encode($data),
+        ];
+
+        return $this->client->request($method, $url, $options);
     }
 }
