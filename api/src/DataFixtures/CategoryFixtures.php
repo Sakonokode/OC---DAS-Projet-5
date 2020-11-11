@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use Symfony\Component\Yaml\Yaml;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class CategoryFixtures
