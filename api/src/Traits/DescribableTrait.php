@@ -11,88 +11,72 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait DescribableTrait
 {
     /**
-     * var null|string $title
+     * @var string $title
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    protected $title;
+    protected string $title;
 
     /**
-     * @var null|string $description
+     * @var string|null $description
      * @ORM\Column(type="text", nullable=true)
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    protected $description;
+    protected string $description;
 
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    protected $slug;
+    protected string $slug;
 
     /**
-     * @var null|string $content
+     * @var string|null $content
      * @ORM\Column(type="text", nullable=true)
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    protected $content;
+    protected string $content;
 
-    /**
-     * @return mixed
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param mixed $title
-     */
-    public function setTitle($title): void
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug): void
+    public function setSlug(string $slug): void
     {
         $this->slug = $slug;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
-    /**
-     * @param string|null $content
-     */
     public function setContent(?string $content): void
     {
         $this->content = $content;

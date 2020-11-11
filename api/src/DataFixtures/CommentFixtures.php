@@ -19,7 +19,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $comments = Yaml::parseFile(__DIR__ . '/fixtures/comments.yaml');
+        $comments = (array) Yaml::parseFile(__DIR__ . '/fixtures/comments.yaml');
 
         foreach ($comments['comments'] as $item => $currentComment) {
             $comment = new Comment();

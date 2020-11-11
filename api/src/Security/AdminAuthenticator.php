@@ -71,6 +71,7 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
+    /** @psalm-suppress all */
     public function getUser($credentials, UserProviderInterface $userProvider): User
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
@@ -88,11 +89,13 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
         return $user;
     }
 
+    /** @psalm-suppress all */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
+    /** @psalm-suppress all */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {

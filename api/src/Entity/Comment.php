@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Traits\EntityTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ApiResource
+ * 
  */
 class Comment
 {
@@ -28,26 +30,32 @@ class Comment
      *     max=10000,
      *     maxMessage="comment.too_long"
      * )
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    private $content;
+    private string $content;
 
     /**
-     * @var User $author
-     *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    private $author;
+    private User $author;
 
     /**
-     * One Comment has Many Comments/Answers.
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent")
+     * @var Children[]|Collection
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent", cascade={"persist"})
+     * 
+     * @psalm-var Collection<int, Comment>
      */
     private $children;
 
     /**
-     * Many Answers/Comments have One Parent.
+     * @var Comment|null
      * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="children")
+     * 
+     * @psalm-suppress MissingPropertyType
      */
     private $parent;
 
@@ -56,9 +64,6 @@ class Comment
         $this->children = new ArrayCollection();
     }
 
-    /**
-     * @param Comment $children
-     */
     public function addChildren(Comment $children): void
     {
         if (!$this->children->contains($children)) {
@@ -66,76 +71,44 @@ class Comment
         }
     }
 
-    /**
-     * @param Comment $children
-     */
     public function removeChildren(Comment $children): void
     {
         if ($this->children->contains($children)) {
-            $this->children->remove($children);
+            $this->children->removeElement($children);
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    /**
-     * @param mixed $content
-     */
-    public function setContent($content): void
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
 
-    /**
-     * @return User
-     */
     public function getAuthor(): User
     {
         return $this->author;
     }
 
-    /**
-     * @param User $author
-     */
     public function setAuthor(User $author): void
     {
         $this->author = $author;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getChildren()
+    public function getChildren(): ?Collection
     {
         return $this->children;
     }
 
-    /**
-     * @param mixed $children
-     */
-    public function setChildren($children): void
-    {
-        $this->children = $children;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParent()
+    public function getParent(): ?Comment
     {
         return $this->parent;
     }
 
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent): void
+    public function setParent(Comment $parent): void
     {
         $this->parent = $parent;
     }
