@@ -16,9 +16,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
  */
 class CategoryFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $categories = Yaml::parseFile(__DIR__ . '/fixtures/categories.yaml');

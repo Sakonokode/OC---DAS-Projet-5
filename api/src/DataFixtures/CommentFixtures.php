@@ -8,7 +8,7 @@ use App\Entity\Comment;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -17,9 +17,6 @@ use Symfony\Component\Yaml\Yaml;
  */
 class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager): void
     {
         $comments = Yaml::parseFile(__DIR__ . '/fixtures/comments.yaml');
