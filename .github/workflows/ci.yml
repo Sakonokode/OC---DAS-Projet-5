@@ -22,6 +22,10 @@ jobs:
       working-directory: ./api
       run: composer update --prefer-dist --no-progress --ansi
 
+    - name: Psalm
+      working-directory: ./api
+      run: psalm --output-format=github --shepherd
+
     - name: Setup and run tests
       working-directory: ./api
       run: |
