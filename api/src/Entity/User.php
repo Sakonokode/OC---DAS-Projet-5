@@ -27,7 +27,7 @@ class User implements UserInterface
      * )
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    protected $username;
+    protected string $username;
 
     /**
      * @var null|string $email
@@ -37,19 +37,22 @@ class User implements UserInterface
      * )
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @var string $password
      * @ORM\Column(type="string", length=255)
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    private $password;
+    private string $password;
 
     /**
      * @var array $roles
      * @ORM\Column(type="json")
+     * 
      */
-    private $roles;
+    private array $roles = [];
 
     public function __construct(string $username)
     {
@@ -78,6 +81,7 @@ class User implements UserInterface
         $this->password = $password;
     }
 
+    /** @psalm-suppress MixedReturnTypeCoercion */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -148,8 +152,10 @@ class User implements UserInterface
      * </p>
      * @return void
      * @since 5.1.0
+     * 
+     * @psalm-suppress all
      */
-    public function unserialize($serialized): void
+    public function unserialize(string $serialized): void
     {
         list (
             $this->id,

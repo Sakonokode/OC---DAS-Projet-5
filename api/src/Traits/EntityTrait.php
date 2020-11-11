@@ -18,24 +18,32 @@ trait EntityTrait
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     protected $id;
 
     /**
      * @var DateTime $created
      * @ORM\Column(type="datetime")
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     protected $created;
 
     /**
      * @var DateTime $updated
      * @ORM\Column(type="datetime")
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     protected $updated;
 
     /**
      * @var null|DateTime $deleted
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     protected $deleted;
 
@@ -43,6 +51,8 @@ trait EntityTrait
      * @ORM\PrePersist
      * @ORM\PreUpdate
      * @throws Exception
+     * 
+     * @psalm-suppress DocblockTypeContradiction
      */
     public function autoUpdateDates(): void
     {
@@ -52,57 +62,31 @@ trait EntityTrait
         $this->updated = new DateTime('now');
     }
 
-    /**
-     * @return null|int
-     */
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return DateTime
-     */
     public function getCreated(): DateTime
     {
         return $this->created;
     }
 
-    /**
-     * @param DateTime $created
-     */
     public function setCreated(DateTime $created): void
     {
         $this->created = $created;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdated(): DateTime
     {
         return $this->updated;
     }
 
-    /**
-     * @param DateTime $updated
-     */
     public function setUpdated(DateTime $updated): void
     {
         $this->updated = $updated;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getDeleted(): ?DateTime
     {
         return $this->deleted;
@@ -117,9 +101,6 @@ trait EntityTrait
         $this->deleted = $deleted;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->id;

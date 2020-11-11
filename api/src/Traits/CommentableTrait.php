@@ -20,32 +20,27 @@ trait CommentableTrait
      *      inverseJoinColumns={@ORM\JoinColumn(name="comment_id", referencedColumnName="id")}
      *      )
      * @ORM\OrderBy({"created" = "DESC"})
+     * 
+     * @psalm-var Collection<int, Comment>
      */
     protected $comments;
 
-    /**
-     * @return Collection|Comment[]
-     */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    /**
-     * @param ArrayCollection|Comment[] $comments
-     */
-    public function setComments($comments): void
-    {
-        $this->comments = $comments;
-    }
-
-    /**
-     * @param Comment $comment
-     */
     public function addComment(Comment $comment): void
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
+        }
+    }
+
+    public function removeComment(Comment $comment): void
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
         }
     }
 }

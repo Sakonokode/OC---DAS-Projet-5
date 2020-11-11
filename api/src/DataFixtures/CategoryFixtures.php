@@ -18,12 +18,12 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $categories = Yaml::parseFile(__DIR__ . '/fixtures/categories.yaml');
+        $categories = (array) Yaml::parseFile(__DIR__ . '/fixtures/categories.yaml');
 
         foreach ($categories['categories'] as $item => $currentCategory) {
             $category = new Category();
-            $category->setTitle($currentCategory['name']);
-            $this->setReference($currentCategory['name'], $category);
+            $category->setTitle((string) $currentCategory['name']);
+            $this->setReference((string) $currentCategory['name'], $category);
 
             $manager->persist($category);
         }
@@ -31,9 +31,6 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    /**
-     * @return array
-     */
     public function getDependencies(): array
     {
         return array(
