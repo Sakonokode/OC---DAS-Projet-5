@@ -10,10 +10,11 @@ RUN apt-get update \
 RUN docker-php-ext-install pdo_mysql
 
 # Install Composer
-RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
+RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls --version=1.10.17 && \
    mv composer.phar /usr/local/bin/composer
 
 RUN groupadd dev -g 999
 RUN useradd dev -g dev -d /home/dev -m
 
 WORKDIR /usr/src/app
+ 

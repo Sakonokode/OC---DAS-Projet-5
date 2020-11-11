@@ -9,7 +9,7 @@ class UserService {
   }
 
   getDocumentation() {
-    return axios.get(API_URL + '/v1', { headers: authHeader() });
+    return axios.get(API_URL + '/docs', { headers: authHeader() });
   }
 
   getModeratorBoard() {

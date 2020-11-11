@@ -71,7 +71,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push('/api/v1');
+      this.$router.push('/api/docs');
     }
   },
   methods: {
@@ -86,7 +86,7 @@ export default {
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
-              this.$router.push('/api/v1');
+              this.$router.push('/api/docs');
             },
             error => {
               this.loading = false;

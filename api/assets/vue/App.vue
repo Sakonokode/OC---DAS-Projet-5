@@ -63,10 +63,10 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch('auth/logout');
-      this.$router.push('api/login');
+      this.$router.push('/login');
     },
     documentation() {
-      this.$router.push('api/v1');
+      this.$router.push('/docs');
     }
   }
 };
