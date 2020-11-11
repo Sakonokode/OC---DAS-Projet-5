@@ -1,4 +1,4 @@
-name: CI
+name: Continuous Integration
 
 on:
   push:
@@ -7,11 +7,22 @@ on:
   pull_request: ~
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-    - uses: php-actions/composer@v1
-    - name: PHPUnit for Symfony
-    - uses: chindit/actions-phpunit-symfony@master
+    
+    - uses: shivammathur/setup-php@v2
+      with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer:v1, psalm
+
+    - name: Install dependencies
+      working-directory: ./api
+      run: composer update --prefer-dist --no-progress --ansi
+
+    - name: Setup and run tests
+      working-directory: ./api
+      run: |
+        php vendor/bin/simple-phpunit
