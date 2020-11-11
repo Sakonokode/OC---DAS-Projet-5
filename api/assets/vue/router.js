@@ -35,5 +35,8 @@ export const router = new Router({
       path: '/api/docs',
       component: Documentation
     },
+    { path: "/posts",
+      component: Posts 
+    },
   ]
 });

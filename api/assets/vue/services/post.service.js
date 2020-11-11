@@ -10,6 +10,9 @@ class PostService {
         message: message,
       });
     }
+    findAll() {
+      return axios.get(API_URL);
+    }
 }
 
-export default new UserService();
+export default new PostService();
