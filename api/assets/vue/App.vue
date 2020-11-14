@@ -3,24 +3,23 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <a href class="navbar-brand" @click.prevent></a>
       <div class="navbar-nav mr-auto">
+
         <li class="nav-item">
-          <router-link to="/home" class="nav-link">
+          <router-link to="/" class="nav-link">
             <font-awesome-icon icon="home" />Home
           </router-link>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href @click.prevent="documentation">
+          <a class="navbar-brand" href="/api/docs">
             <font-awesome-icon icon="book" />Documentation
           </a>
-        </li>
-        <li class="nav-item">
-          <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
         </li>
       </div>
 
       <div v-if="!currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/register" class="nav-link">
+          <router-link to="/api/register" class="nav-link">
             <font-awesome-icon icon="user-plus" />Sign Up
           </router-link>
         </li>
@@ -33,7 +32,7 @@
 
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/api/posts" class="nav-link">
+          <router-link to="/" class="nav-link">
             <font-awesome-icon icon="newspaper" />Posts
           </router-link>
         </li>
@@ -65,9 +64,6 @@ export default {
       this.$store.dispatch('auth/logout');
       this.$router.push('/api/login');
     },
-    documentation() {
-      this.$router.push('/docs');
-    }
   }
 };
 </script>

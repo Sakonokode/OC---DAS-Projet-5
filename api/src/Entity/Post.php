@@ -26,6 +26,7 @@ class Post
 
     /**
      * @var User $author
+     * 
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      * 

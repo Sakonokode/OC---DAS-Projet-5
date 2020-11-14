@@ -27,14 +27,12 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $author = $manager->getRepository(User::class)->find($currentComment['author']);
             $comment->setAuthor($author);
 
-            if ($currentComment['parent']) {
-                $parent = $manager->getRepository(Comment::class)->find($currentComment['parent']);
-                $comment->setParent($parent);
-            }
-
-            if ($currentComment['children']) {
-                $children = $manager->getRepository(Comment::class)->find($currentComment['children']);
-                $comment->setChildren($children);
+            if (!empty($currentComment['children'])) {
+                $children = new Comment();
+                $children->setContent($currentComment['content']);
+                $children->setAuthor($author);
+                $children->setParent($comment);
+                $comment->addChildren($children);
             }
 
             $manager->persist($comment);

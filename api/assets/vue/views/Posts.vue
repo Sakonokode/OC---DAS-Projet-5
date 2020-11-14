@@ -8,15 +8,28 @@
       <form>
         <div class="form-row">
           <div class="col-8">
+            <label class="label-title">Title</label>
             <input
-              v-model="message"
+            v-model="title"
+            type="text"
+            class="form-control"
+            >
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-8">
+            <label class="label-content">Content</label>
+            <input
+              v-model="content"
               type="text"
               class="form-control"
             >
           </div>
+        </div>
+        <div class="form-row">
           <div class="col-4">
             <button
-              :disabled="message.length === 0 || isLoading"
+              :disabled="content.length === 0 || isLoading"
               type="button"
               class="btn btn-primary"
               @click="createPost()"
@@ -60,7 +73,7 @@
       :key="post.id"
       class="row col"
     >
-      <post :message="post.message" />
+      <post :content="post.content" />
     </div>
   </div>
 </template>
@@ -75,7 +88,9 @@ export default {
   },
   data() {
     return {
-      message: ""
+      content: "",
+      title: "",
+      description: ""
     };
   },
   computed: {
@@ -95,16 +110,16 @@ export default {
       return this.$store.getters["post/posts"];
     }
   },
-  created() {
+  mounted() {
     this.$store.dispatch("post/findAll");
   },
   methods: {
     async createPost() {
-      const result = await this.$store.dispatch("post/create", this.$data.message);
+      const result = await this.$store.dispatch("post/create", this.$data);
       if (result !== null) {
-        this.$data.message = "";
+        this.$data = "";
       }
-    }
+    },
   }
 };
 </script>
