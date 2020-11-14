@@ -14,12 +14,10 @@ export const auth = {
       return AuthService.login(user).then(
         user => {
           commit('loginSuccess', user);
-          console.log('login success');
           return Promise.resolve(user);
         },
         error => {
           commit('loginFailure');
-          console.log('login failure');
           return Promise.reject(error);
         }
       );
@@ -27,7 +25,6 @@ export const auth = {
     logout({ commit }) {
       AuthService.logout();
       commit('logout');
-      console.log('logout');
     },
     register({ commit }, user) {
       return AuthService.register(user).then(

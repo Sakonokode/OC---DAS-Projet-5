@@ -63,10 +63,10 @@ export const post = {
     }
   },
   actions: {
-    async create({ commit }, message) {
+    async create({ commit }, author, title, content) {
       commit(CREATING_POST);
       try {
-        let response = await PostService.create(message);
+        let response = await PostService.create(author, title, content);
         commit(CREATING_POST_SUCCESS, response.data);
         return response.data;
       } catch (error) {

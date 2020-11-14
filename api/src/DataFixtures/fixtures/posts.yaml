@@ -7,6 +7,7 @@ posts:
     venenatis, rutrum turpis.Cras placerat, lorem in auctor vehicula, tellus ante blandit sapien, eget ultricies eros
     metus eu lectus. Nam eleifend nisl vel urna vehicula, mollis aliquet lectus facilisis. Vivamus gravida fermentum
     dictum. Nulla a consequat dui, id dignissim tellus."
+    description: "description test"
     category: "News"
     comments:
       - 1
@@ -23,6 +24,7 @@ posts:
     turpis eu, imperdiet nunc. Duis arcu orci, congue ut nibh ac, egestas dictum mi. In elementum, nisl id feugiat
     ullamcorper, lectus velit tristique sapien, eu interdum sapien diam sed massa. Pellentesque ultricies odio at
     enim pulvinar ornare."
+    description: "description test"
     category: "Others"
     comments:
       - 1

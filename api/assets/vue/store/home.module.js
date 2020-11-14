@@ -15,7 +15,7 @@ export const home = {
       return UserService.getDocumentation();
     },
     findPosts(user) {
-      return UserService.findPosts();
+      return UserService.findAllPosts();
     },
   },
 };

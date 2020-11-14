@@ -11,16 +11,6 @@ register:
   controller: App\Controller\AuthController::register
   methods: [GET|POST]
 
-admin_login:
-  path: /admin/login
-  controller: App\Controller\SecurityController::login
-  methods: [GET|POST]
-
-admin_logout:
-  path: /admin/logout
-  controller: App\Controller\SecurityController:logout
-  methods: [GET]
-
 api:
   path: /api/v1
   controller: App\Controller\AuthController::api

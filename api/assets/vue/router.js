@@ -1,9 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
-import Documentation from './views/Documentation.vue';
 import Posts from './views/Posts.vue';
 
 Vue.use(Router);
@@ -14,11 +12,7 @@ export const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
-    },
-    {
-      path: '/home',
-      component: Home
+      component: Posts
     },
     {
       path: '/api/login',
@@ -32,12 +26,22 @@ export const router = new Router({
       path: '/api/register',
       component: Register
     },
-    {
-      path: '/api/docs',
-      component: Documentation
-    },
     { path: "/posts",
       component: Posts
     },
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/api/login', '/api/register'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('token');
+
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (authRequired && !loggedIn) {
+    next('/api/login');
+  } else {
+    next();
+  }
 });

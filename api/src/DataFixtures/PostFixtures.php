@@ -26,12 +26,15 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         $posts = Yaml::parseFile(__DIR__ . '/fixtures/posts.yaml');
 
         foreach ($posts['posts'] as $item => $currentPost) {
-            $comments = $manager->getRepository(Comment::class)->findAll();
             $post = new Post();
             $post->setAuthor($author);
             $post->setTitle($currentPost['title']);
             $post->setContent($currentPost['content']);
-            $post->setComments($comments);
+            $post->setDescription($currentPost['description']);
+            $comments = $manager->getRepository(Comment::class)->findAll();
+            foreach ($comments as $comment) {
+                $post->addComment($comment);
+            }
 
             /** @var Category $category */
             $category = $this->getReference($currentPost['category']);
