@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
 import Posts from './views/Posts.vue';
+import Home from './views/Home.vue';
+import axios from 'axios';
 
 Vue.use(Router);
 
@@ -12,7 +14,7 @@ export const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Posts
+      component: Home
     },
     {
       path: '/api/login',
@@ -26,22 +28,22 @@ export const router = new Router({
       path: '/api/register',
       component: Register
     },
-    { path: "/posts",
+    { path: "/api/posts",
       component: Posts
     },
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  const publicPages = ['/api/login', '/api/register'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('token');
-
-  // trying to access a restricted page + not logged in
-  // redirect to login page
-  if (authRequired && !loggedIn) {
-    next('/api/login');
-  } else {
-    next();
-  }
-});
+//router.beforeEach((to, from, next) => {
+//  const publicPages = ['/api/login', '/api/register'];
+//  const authRequired = !publicPages.includes(to.path);
+//  const loggedIn = localStorage.getItem('token');
+//console.log(to)
+//  // trying to access a restricted page + not logged in
+//  // redirect to login page
+//  if (authRequired && !loggedIn) {
+//    next('/api/login');
+//  } else {
+//    next();
+//  }
+//});

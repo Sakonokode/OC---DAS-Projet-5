@@ -11,7 +11,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="navbar-brand" href="/api/docs">
+          <a class="navbar-brand nav-link" href="/api/docs">
             <font-awesome-icon icon="book" />Documentation
           </a>
         </li>
@@ -32,8 +32,8 @@
 
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/" class="nav-link">
-            <font-awesome-icon icon="newspaper" />Posts
+          <router-link to="/api/posts" class="nav-link">
+            <font-awesome-icon icon="newspaper" />Create Post
           </router-link>
         </li>
         <li class="nav-item">
@@ -52,6 +52,7 @@
 
 <script>
 import UserService from './services/user.service';
+import axios from 'axios';
 
 export default {
   computed: {

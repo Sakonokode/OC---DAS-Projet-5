@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
+ * 
  * @ApiResource
  */
 class Post
@@ -32,7 +33,14 @@ class Post
      * 
      * @psalm-suppress PropertyNotSetInConstructor
      */
-    protected User $author;
+    private User $author;
+
+    /** 
+     * @var string $thumbnail 
+     * 
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $thumbnail;
 
     public function __construct()
     {
@@ -48,5 +56,15 @@ class Post
     public function setAuthor(User $author): void
     {
         $this->author = $author;
+    }
+
+    public function getThumbnail(): string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(string $thumbnail): void
+    {
+        $this->thumbnail = $thumbnail;
     }
 }

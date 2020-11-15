@@ -17,7 +17,7 @@ security:
         public:
             pattern: ^/(public|api/docs)
             security: false
-
+            
         login:
             pattern: ^/api/login
             stateless: true

@@ -19,14 +19,6 @@ trait DescribableTrait
     protected string $title;
 
     /**
-     * @var string|null $description
-     * @ORM\Column(type="text", nullable=true)
-     * 
-     * @psalm-suppress PropertyNotSetInConstructor
-     */
-    protected string $description;
-
-    /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
      * 
@@ -50,16 +42,6 @@ trait DescribableTrait
     public function setTitle(string $title): void
     {
         $this->title = $title;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): void
-    {
-        $this->description = $description;
     }
 
     public function getSlug(): string

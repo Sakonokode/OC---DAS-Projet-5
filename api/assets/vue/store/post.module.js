@@ -78,8 +78,8 @@ export const post = {
       commit(FETCHING_POSTS);
       try {
         let response = await PostService.findAll();
-        commit(FETCHING_POSTS_SUCCESS, response.data);
-        return response.data;
+        commit(FETCHING_POSTS_SUCCESS, response.data['hydra:member']);
+        return response.data['hydra:member'];
       } catch (error) {
         commit(FETCHING_POSTS_ERROR, error);
         return null;
