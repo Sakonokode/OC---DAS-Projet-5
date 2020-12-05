@@ -67,7 +67,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("post/findAll", this.$data);
+    this.$store.dispatch("post/findAll");
   }
 };
 </script>

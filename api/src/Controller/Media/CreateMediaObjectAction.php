@@ -6,9 +6,10 @@ namespace App\Controller\Media;
 
 use App\Entity\MediaObject;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-final class CreateMediaObjectAction
+final class CreateMediaObjectAction extends AbstractController
 {
     public function __invoke(Request $request): MediaObject
     {

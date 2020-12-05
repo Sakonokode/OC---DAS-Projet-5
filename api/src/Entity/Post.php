@@ -48,6 +48,9 @@ class Post
      *
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
+     * 
+     * @Groups({"post"})
+     * 
      * @ApiProperty(iri="http://projet5.sakonokode.dev/api/image")
      */
     public ?MediaObject $image;
@@ -70,11 +73,11 @@ class Post
 
     public function getImage(): ?MediaObject
     {
-        return $this->media;
+        return $this->image;
     }
 
-    public function setImage(MediaObject $media): void
+    public function setImage(MediaObject $image): void
     {
-        $this->media = $media;
+        $this->image = $image;
     }
 }

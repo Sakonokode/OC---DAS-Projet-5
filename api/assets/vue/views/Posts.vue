@@ -60,8 +60,7 @@ export default {
     return {
       content: "",
       title: "",
-      media: "",
-      author: ""
+      media: ""
     };
   },
   computed: {
@@ -83,22 +82,10 @@ export default {
   },
   methods: {
     async createPost() {
-
-      //this.$validator.validateAll().then(isValid => {
-      //  if (!isValid) {
-      //    return;
-      //  }
-//
-      //  if (this.content && this.media && this.author && this.title) {
-      //    
-      //  }
-      //});
-
       let data = {
         'media': this.media,
         'content': this.content,
         'title': this.title,
-        'author': this.author,
       };
 
       let result = await this.$store.dispatch("post/create", data);
@@ -115,16 +102,11 @@ export default {
           Add the form data we need to submit
       */
       formData.append('file', this.media);
-      //let data = {
-      //  "contentUrl": "",
-      //  "file": {
-      //    "path": this.media.name,
-      //    'type': this.media.type
-      //  },
-      //  "filePath": ""
-      //};
-
-      await this.$store.dispatch("media/create", formData);
+      await this.$store.dispatch("media/create", formData).then(response => {
+        console.log('response in vue', response)
+        this.media = response['@id']
+      });
+      
     }
   }
 };

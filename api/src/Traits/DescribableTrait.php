@@ -3,16 +3,15 @@
 namespace App\Traits;
 
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * Trait DescribableTrait
- * @package App\Traits
- */
 trait DescribableTrait
 {
     /**
      * @var string $title
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"post"})
      * 
      * @psalm-suppress PropertyNotSetInConstructor
      */
@@ -29,6 +28,8 @@ trait DescribableTrait
     /**
      * @var string|null $content
      * @ORM\Column(type="text", nullable=true)
+     * 
+     * @Groups({"post"})
      * 
      * @psalm-suppress PropertyNotSetInConstructor
      */

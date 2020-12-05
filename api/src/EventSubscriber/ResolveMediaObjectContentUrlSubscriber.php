@@ -15,6 +15,7 @@ use Vich\UploaderBundle\Storage\StorageInterface;
 
 final class ResolveMediaObjectContentUrlSubscriber implements EventSubscriberInterface
 {
+    /** @var StorageInterface */
     private $storage;
 
     public function __construct(StorageInterface $storage)

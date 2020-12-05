@@ -66,12 +66,14 @@ export const post = {
   actions: {
     async create({ commit }, data) {
       commit(CREATING_POST);
+      console.log('data = ', data);
       try {
         let response = await PostService.create(data);
         commit(CREATING_POST_SUCCESS, response.data);
         console.log('module : success', response.data)
         return response.data;
       } catch (error) {
+        console.log('post module error', error, response)
         commit(CREATING_POST_ERROR, error);
         return null;
       }
@@ -81,6 +83,7 @@ export const post = {
       try {
         let response = await PostService.findAll();
         commit(FETCHING_POSTS_SUCCESS, response.data['hydra:member']);
+        console.log('post module : success', response)
         return response.data['hydra:member'];
       } catch (error) {
         commit(FETCHING_POSTS_ERROR, error);

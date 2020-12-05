@@ -6,6 +6,7 @@ const API_URL = 'https://projet5.sakonokode.dev/api';
 
 class PostService {
     create(data) {
+      console.log('post service', data)
       return axios.post(API_URL + '/posts', {
         title: data.title,
         content: data.content,
@@ -16,18 +17,18 @@ class PostService {
         headers: authHeader()
       })
       .then(response => {
-        console.log('SUCCESS', response.data)
         return response.data;
       })
       .catch(function(e){
-        console.log('FAILURE!!', e);
-        });
+        console.log('can\'t create post', e);
+      });
     }
     findAll() {
       return axios.get(API_URL + '/posts', {
         headers: authHeader()
-      }).catch(function(error) {
-        
+      })
+      .catch(function(error) {
+        console.log('can\'t find posts', error)
       });
     }
 }

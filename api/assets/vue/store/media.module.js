@@ -40,17 +40,16 @@ export const media = {
   },
   actions: {
     async create({ commit }, data) {
-      commit(CREATING_MEDIA);
-      try {
-        let response = await MediaService.create(data);
-        commit(CREATING_MEDIA_SUCCESS, response.data['hydra:member']);
-        console.log('module : success', response.data['hydra:member'])
-        return response.data['hydra:member'];
-      } catch (error) {
-        commit(CREATING_MEDIA_ERROR, error);
-        console.log('error', error)
-        return null;
-      }
+      commit(CREATING_MEDIA)
+      return new Promise((resolve, reject) => {
+        MediaService.create(data).then(response => {
+            commit(CREATING_MEDIA_SUCCESS, response.data)
+            resolve(response);
+        }, error => {
+            commit(CREATING_MEDIA_ERROR, error)
+            reject(error);
+        })
+      })
     },
   }
 };

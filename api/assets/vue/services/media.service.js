@@ -5,17 +5,16 @@ const API_URL = 'https://projet5.sakonokode.dev/api/media_objects';
 
 class MediaService {
     create(data) {
-      console.log('data', data)
       return axios.post(API_URL, data,
       {
         headers: authHeader()
       })
       .then(response => {
-        console.log('SUCCESS', response.data)
+        console.log('media service SUCCESS', response)
         return response.data;
       })
       .catch(function(e){
-        console.log('FAILURE!!', e);
+        console.log('media service FAILURE!!', e);
         });
     }
 }
