@@ -1,31 +1,33 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-import { router } from '../router';
+import { store } from '../store';
 
-const API_URL = 'https://projet5.sakonokode.dev/api/posts';
+const API_URL = 'https://projet5.sakonokode.dev/api';
 
 class PostService {
     create(data) {
-      return axios.post(API_URL, {
+      return axios.post(API_URL + '/posts', {
         title: data.title,
         content: data.content,
         author: data.author,
-        thumbnail: data.thumbnail
+        media: data.media
       },
       {
         headers: authHeader()
       })
       .then(response => {
+        console.log('SUCCESS', response.data)
         return response.data;
-      });
+      })
+      .catch(function(e){
+        console.log('FAILURE!!', e);
+        });
     }
     findAll() {
-      return axios.get(API_URL, {
+      return axios.get(API_URL + '/posts', {
         headers: authHeader()
       }).catch(function(error) {
-        if (error.response && error.response.status === 401) {
-          router.push('/api/logout')
-        }
+        
       });
     }
 }

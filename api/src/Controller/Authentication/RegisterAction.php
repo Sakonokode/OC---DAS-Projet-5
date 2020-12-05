@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Authentication;
 
 use App\Entity\User;
-use App\Form\LoginType;
 use App\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -14,19 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AuthController extends AbstractController
+class RegisterAction extends AbstractController
 {
-    /**
-     * @return Response
-     */
-    public function login(): Response
-    {
-        $form = $this->createForm(LoginType::class);
-
-        return new Response($this->renderView('auth/login.html.twig', ['form' => $form->createView()]), Response::HTTP_OK);
-    }
-
-    public function register(
+    public function __invoke(
         Request $request,
         UserPasswordEncoderInterface $encoder
     ): Response {

@@ -27,8 +27,8 @@ export default {
       type: String,
       required: true
     },
-    thumbnail: {
-      type: String,
+    media: {
+      type: File,
       required: true
     }
   }

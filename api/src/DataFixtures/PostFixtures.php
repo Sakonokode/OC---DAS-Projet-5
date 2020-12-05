@@ -30,7 +30,6 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post->setAuthor($author);
             $post->setTitle($currentPost['title']);
             $post->setContent($currentPost['content']);
-            $post->setThumbnail($currentPost['thumbnail']);
             $comments = $manager->getRepository(Comment::class)->findAll();
             foreach ($comments as $comment) {
                 $post->addComment($comment);

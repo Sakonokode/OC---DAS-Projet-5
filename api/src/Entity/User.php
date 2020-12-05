@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Traits\EntityTrait;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -26,6 +27,8 @@ class User implements UserInterface
      *     message = "The email '{{ value }}' is not a valid email."
      * )
      * @ORM\Column(type="string", length=255, unique=true)
+     * 
+     * @Groups("book")
      */
     protected string $username;
 

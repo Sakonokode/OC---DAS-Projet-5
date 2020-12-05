@@ -33,7 +33,7 @@
           :key="post.id"
           class="row col-4 post-container"
           >
-          <post :title="post.title" :author="post.author" :thumbnail="post.thumbnail" :content="post.content" />
+          <post :title="post.title" :author="post.author" :content="post.content" :media="post.media" />
         </div>
       </div>
     </div>
@@ -67,11 +67,7 @@ export default {
     }
   },
   mounted() {
-    const result = this.$store.dispatch("post/findAll", this.$data);
-      if (result !== null) {
-        console.log(result);
-      }
-      console.log(result);
+    this.$store.dispatch("post/findAll", this.$data);
   }
 };
 </script>

@@ -11,12 +11,18 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Traits\CategorizableTrait;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Annotation\UserAware;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  * 
- * @ApiResource
+ * @ApiResource(normalizationContext={"groups"={"post"}})
+ * 
+ * @UserAware(userFieldName="user_id")
+ * 
  */
 class Post
 {
@@ -31,16 +37,20 @@ class Post
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      * 
+     * @Groups({"post"})
+     * 
      * @psalm-suppress PropertyNotSetInConstructor
      */
     private User $author;
 
-    /** 
-     * @var string $thumbnail 
-     * 
-     * @ORM\Column(type="string", length=255)
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @ApiProperty(iri="http://projet5.sakonokode.dev/api/image")
      */
-    private string $thumbnail;
+    public ?MediaObject $image;
 
     public function __construct()
     {
@@ -58,13 +68,13 @@ class Post
         $this->author = $author;
     }
 
-    public function getThumbnail(): string
+    public function getImage(): ?MediaObject
     {
-        return $this->thumbnail;
+        return $this->media;
     }
 
-    public function setThumbnail(string $thumbnail): void
+    public function setImage(MediaObject $media): void
     {
-        $this->thumbnail = $thumbnail;
+        $this->media = $media;
     }
 }

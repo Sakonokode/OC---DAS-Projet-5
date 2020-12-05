@@ -1,4 +1,5 @@
 import PostService from "../services/post.service";
+import AuthService from "../services/auth.service";
 
 const CREATING_POST = "CREATING_POST",
   CREATING_POST_SUCCESS = "CREATING_POST_SUCCESS",
@@ -63,11 +64,12 @@ export const post = {
     }
   },
   actions: {
-    async create({ commit }, author, title, content) {
+    async create({ commit }, data) {
       commit(CREATING_POST);
       try {
-        let response = await PostService.create(author, title, content);
+        let response = await PostService.create(data);
         commit(CREATING_POST_SUCCESS, response.data);
+        console.log('module : success', response.data)
         return response.data;
       } catch (error) {
         commit(CREATING_POST_ERROR, error);
@@ -82,8 +84,10 @@ export const post = {
         return response.data['hydra:member'];
       } catch (error) {
         commit(FETCHING_POSTS_ERROR, error);
+        //AuthService.logout();
+        // redirect here
         return null;
       }
-    }
+    },
   }
 };

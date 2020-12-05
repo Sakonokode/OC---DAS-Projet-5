@@ -20,6 +20,7 @@ class AuthService {
   }
 
   logout() {
+    console.log('logout est appelle')
     localStorage.removeItem('token');
   }
 

@@ -4,11 +4,11 @@ swagger_ui:
 
 index:
   path: /
-  controller: App\Controller\HomeController
+  controller: App\Controller\Home\HomeAction
 
 register:
   path: /api/register
-  controller: App\Controller\AuthController::register
+  controller: App\Controller\Authentication\LoginAction
   methods: [GET|POST]
 
 api:
@@ -17,7 +17,7 @@ api:
 
 api_login:
   path: /api/login
-  controller: App\Controller\AuthController::login
+  controller: App\Controller\Authentication\LoginAction
   methods: [GET]
 
 api_login_check:

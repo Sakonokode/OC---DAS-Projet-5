@@ -6,3 +6,12 @@ api_platform:
             apiKey:
                 name: Authorization
                 type: header
+
+    patch_formats:
+        multipart: ['multipart/form-data']
+
+doctrine:
+    orm:
+        filters:
+            user_filter:
+                class: App\Filter\UserFilter

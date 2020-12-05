@@ -14,6 +14,13 @@
         </div>
         <div class="form-row">
           <div class="col-8">
+            <label>Media
+              <input type="file" id="media" ref="media" v-on:change="handleFileUpload()"/>
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-8">
             <label class="label-content">Content</label>
             <input
               v-model="content"
@@ -41,6 +48,8 @@
 
 <script>
 import Post from "../components/Post";
+import authHeader from '../services/auth-header';
+import axios from 'axios';
 
 export default {
   name: "Posts",
@@ -51,7 +60,8 @@ export default {
     return {
       content: "",
       title: "",
-      description: ""
+      media: "",
+      author: ""
     };
   },
   computed: {
@@ -73,11 +83,49 @@ export default {
   },
   methods: {
     async createPost() {
-      const result = await this.$store.dispatch("post/create", this.$data);
+
+      //this.$validator.validateAll().then(isValid => {
+      //  if (!isValid) {
+      //    return;
+      //  }
+//
+      //  if (this.content && this.media && this.author && this.title) {
+      //    
+      //  }
+      //});
+
+      let data = {
+        'media': this.media,
+        'content': this.content,
+        'title': this.title,
+        'author': this.author,
+      };
+
+      let result = await this.$store.dispatch("post/create", data);
+      
       if (result !== null) {
-        console.log(result)
+        console.log('create post result = ', result)
       }
     },
+    async handleFileUpload(){
+      this.media = this.$refs.media.files[0];
+      let formData = new FormData();
+
+      /*
+          Add the form data we need to submit
+      */
+      formData.append('file', this.media);
+      //let data = {
+      //  "contentUrl": "",
+      //  "file": {
+      //    "path": this.media.name,
+      //    'type': this.media.type
+      //  },
+      //  "filePath": ""
+      //};
+
+      await this.$store.dispatch("media/create", formData);
+    }
   }
 };
 </script>
