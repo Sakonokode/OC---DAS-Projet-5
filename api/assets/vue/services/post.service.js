@@ -11,7 +11,7 @@ class PostService {
         title: data.title,
         content: data.content,
         author: data.author,
-        media: data.media
+        image: data.media
       },
       {
         headers: authHeader()
